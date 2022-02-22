@@ -1,0 +1,59 @@
+from os import O_WRONLY
+from zipapp import create_archive
+from pycat.core import Window
+window=Window()
+bbq=input("What animal size do you want?")
+answer=input("what animal do yo like? ")
+animal=window.create_sprite()
+a=window.create_sprite()
+b=window.create_sprite()
+c=window.create_sprite()
+d=window.create_sprite()
+e=window.create_sprite()
+f=window.create_sprite()
+animal.goto_random_position
+animal.scale=float(bbq)
+b.scale=float(bbq)
+c.scale=float(bbq)
+d.scale=float(bbq)
+e.scale=float(bbq)
+f.scale=float(bbq)
+a.scale=float(bbq)
+b.goto_random_position
+c.goto_random_position
+d.goto_random_position
+e.goto_random_position
+f.goto_random_position
+a.goto_random_position
+
+if answer=="owl":
+    animal.image="owl.gif"
+if answer=="tiger":
+    animal.image="tiger.png"
+if answer=="elephant":
+    animal.image="elephant.png"
+if answer=="pig":
+    animal.image="pig.png"
+if answer=="rat":
+    animal.image="rat.png"
+if answer=="rooster":
+    animal.image="rooster.png"  
+if answer=="wildcat":
+    animal.image="wildcat.png"
+if answer=="all":
+    a.image="wildcat.png"
+    b.image="rooster.png"
+    c.image="rat.png"
+    d.image="pig.png" 
+    e.image="elephant.png"
+    f.image="tiger.png"
+    animal.image="owl.gif"
+
+msg = ("I am a "+ answer + " in the zoo!The zoo is on "+
+       str(animal.x) +"x," +str(animal.y)+"y!")
+print(msg)
+print(type(animal.image))
+print(type(animal.x))
+print(type(animal.rotation))
+print(type(animal.is_visible))
+window.run()
