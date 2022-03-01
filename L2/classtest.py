@@ -15,7 +15,7 @@ class Fireball(Sprite):
         self.goto_random_position()
         self.opacity= randint(0, 255)
 
-for i in range(99):
+for i in range(9999):
     w.create_sprite(Owl)
     w.create_sprite(Fireball) 
 w.run()
