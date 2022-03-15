@@ -11,13 +11,13 @@ class Owl(Sprite):
         self.y=680
     def on_update(self, dt):
         if w.is_key_pressed(KeyCode.UP):
-            self.rotation=90
+            self.y +=10
         if w.is_key_pressed(KeyCode.RIGHT):
-            self.rotation=0
+            self.x +=10 
         if w.is_key_pressed(KeyCode.LEFT):
-            self.rotation=180
+            self.x -=10 
         if w.is_key_pressed(KeyCode.DOWN):
-            self.rotation=270  
+            self.y -=10 
         if self.is_touching_any_sprite():
             print("you lose!")
             w.close()
@@ -54,3 +54,5 @@ w.create_sprite(Eagle)
 for i in range(50):
     w.create_sprite(Fireball)
 w.run()
+
+
