@@ -9,9 +9,6 @@ def draw_a_circle(size):
     for i in range(36):
         t.move_forward(size)
         t.rotation+=10
-        for i in range(36):
-            t.move_forward(size)
-            t.rotation+=10
 
 draw_a_circle(int(input("size?")))   
 
