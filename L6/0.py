@@ -23,7 +23,6 @@ class Alien(Sprite):
 
     def on_left_click(self):
         self.is_clicked =True
-        print("?")
     def on_update(self, dt):
         if self.is_clicked:
             self.y +=10
@@ -32,7 +31,9 @@ class Alien(Sprite):
                 self.delete()
                 print(ufo.score)
             if self.is_touching_window_edge():
+                ufo.score-=1
                 self.delete()
+                print(ufo.score)
         else:
             self.move_forward(10)
             if self.is_touching_window_edge():
@@ -52,7 +53,7 @@ class Alien(Sprite):
 
 def create_alien():
     w.create_sprite(Alien)
-Scheduler.update(create_alien,0.5)
+Scheduler.update(create_alien,0.25)
 w.create_sprite(Alien)
 ufo = w.create_sprite(UFO)
 w.run()
