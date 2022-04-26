@@ -45,7 +45,7 @@ class Barrel(Sprite):
         self.image="img/barrel1.png"
         self.rotation=randint(0,180)
     def on_update(self, dt):
-        self.move_forward(2)
+        self.move_forward(5)
         if self.is_touching_window_edge():
             self.delete()
         
