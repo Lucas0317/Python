@@ -110,7 +110,7 @@ class Penguin2(Sprite):
                 self.life -=1
 lab=w.create_label()
 penguin = w.create_sprite(Penguin)
-Penguin2 = w.create_sprite(Penguin2)
+penguin2 = w.create_sprite(Penguin2)
 shark   = w.create_sprite(Shark)
 w.run()
 
