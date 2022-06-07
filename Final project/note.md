@@ -6,7 +6,7 @@ you need to protect your castle and you can kill the zombie with your gun
 
 
 
-5/31       ddd 
+Day1       ddd 
 
 1.make the zombie castle class
  - hp
@@ -15,3 +15,19 @@ you need to protect your castle and you can kill the zombie with your gun
 2.make the gun
 
 3.make the castle
+
+Day3
+1.debug
+
+2.shop
+
+3.shop add speed
+
+
+
+Day3
+1.debug
+
+2.shop add money
+
+3.shop add life
