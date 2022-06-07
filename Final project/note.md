@@ -6,7 +6,7 @@ you need to protect your castle and you can kill the zombie with your gun
 
 
 
-5/31        
+5/31       ddd 
 
 1.make the zombie castle class
  - hp
