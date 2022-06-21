@@ -1,6 +1,7 @@
 from pycat.core import Color, Sprite, Window,KeyCode, Scheduler,Label
 from random import randint
 
+
 w = Window(width=1000,height=1000)
 
 class Shop(Sprite):
@@ -12,12 +13,18 @@ class Shop(Sprite):
         self.back=w.create_sprite(ShopBack)
         self.heart=w.create_sprite(HeartUp)
         self.bullet=w.create_sprite(BulletUp)
+        self.more=w.create_sprite(More)
+        self.less = w.create_sprite(Less)
+        self.much = w.create_label(Much)
         self.speed_up=None
     def on_update(self, dt):
         if self.is_touching_sprite(player):
             self.back.is_visible=True
             self.heart.is_visible=True
             self.bullet.is_visible=True
+            self.more.is_visible=True
+            self.less.is_visible=True
+            self.much.is_visible=True
             if self.speed_up is None:
                 self.speed_up=w.create_sprite(SpeedUp) 
 
@@ -33,7 +40,33 @@ class ShopBack(Sprite):
     def on_left_click(self):
         self.is_visible=False
         
-
+class More(Sprite):
+    def on_create(self):
+        self.scale =0.5
+        self.x=200
+        self.y=300
+        self.image="img/plus.png"
+        self.layer=5
+        self.much=1
+        self.is_visible=False
+    def on_left_click(self):
+        if self.is_visible:
+            self.much += 1
+    def on_left_click_anywhere(self):
+        self.is_visible=False
+class Less(Sprite):
+    def on_create(self):
+        self.scale =0.5
+        self.x=800
+        self.y=300
+        self.image="img/download.png"
+        self.layer=5
+        self.is_visible=False
+    def on_left_click(self):
+        if self.is_visible:
+            more.much-=1
+    def on_left_click_anywhere(self):
+        self.is_visible=False
 class SpeedUp(Sprite):
     def on_create(self):
         self.scale =0.5
@@ -42,9 +75,9 @@ class SpeedUp(Sprite):
         self.image="img/faster-icon-png-1.png"
         self.layer=5
     def on_left_click(self):
-        if self.is_visible and player.money >=5:
-            player.speed+=1
-            player.money-=5
+        if self.is_visible and player.money >=5*more.much:
+            player.speed+=1*more.much
+            player.money-=5*more.much
             self.delete()
             shop.speed_up=None
     def on_left_click_anywhere(self):
@@ -59,11 +92,23 @@ class HeartUp(Sprite):
         self.layer=5
         self.is_visible=False
     def on_left_click(self):
-        if self.is_visible and player.money >=10:
-            player.life+=10
-            player.money-=10
+        if self.is_visible and player.money >=10*more.much:
+            player.life+=10*more.much
+            player.money-=10*more.much
     def on_left_click_anywhere(self):
         self.is_visible=False
+class Much(Label):
+    def on_create(self):
+        self.scale =5
+        self.x=100
+        self.y=950
+        self.layer=5
+        self.color=Color.BLACK
+        self.is_visible=False
+    def on_left_click_anywhere(self):
+        self.is_visible=False
+    def on_update(self, dt: float):
+        self.text=str(more.much)
 class BulletUp(Sprite):
     def on_create(self):
         self.scale =0.3
@@ -73,9 +118,9 @@ class BulletUp(Sprite):
         self.layer=5
         self.is_visible=False
     def on_left_click(self):
-        if self.is_visible and player.money >=50:
-            player.bullet_n+=1
-            player.money-=50
+        if self.is_visible and player.money >=50*more.much:
+            player.bullet_n+=1*more.much
+            player.money-=50*more.much
     def on_left_click_anywhere(self):
         self.is_visible=False
 
@@ -93,7 +138,6 @@ class Player(Sprite):
     def on_update(self,dpeed):
         if w.is_key_pressed(KeyCode.W):
             self.y += self.speed
-            print(self.speed)
         if w.is_key_pressed(KeyCode.S):
             self.y -= self.speed
         if w.is_key_pressed(KeyCode.A):
@@ -137,7 +181,6 @@ class Bullet(Sprite):
         if self.is_touching_sprite(enemy_castle):
             self.delete()
             enemy_castle.life-=5
-            print(enemy_castle.life)
             player.money+=1
         if self.is_touching_window_edge():
             self.delete()
@@ -191,7 +234,7 @@ class Enemy(Sprite):
     
     def on_update(self, dt):
         self.time += dt
-        if self.time > 1:
+        if self.time > 2:
             self.time = 0
             bullet = w.create_sprite(EnemyBullet)
             bullet.position = self.position
@@ -207,7 +250,6 @@ class Enemy(Sprite):
             self.delete()
             player.life-=10
             player.money=max(0,player.money-2)
-            print(player.life)
 
 
 class EnemyBullet(Sprite):
@@ -267,10 +309,13 @@ w.create_label(EnemyCastleLife)
 w.create_label(PlayerLife)
 w.create_label(PlayerMoney)
 player = w.create_sprite(Player)
+more = w.create_sprite(More)
+less = w.create_sprite(Less)
 shop = w.create_sprite(Shop)
 enemy_castle = w.create_sprite(EnemyCastle)
 for i in range((randint(1,3))):
     enemy=w.create_sprite(Enemy)
 w.run()
+
 
 
