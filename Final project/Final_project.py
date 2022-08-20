@@ -100,6 +100,8 @@ class Player(Sprite):
             self.x -= self.speed
         if w.is_key_pressed(KeyCode.D):
             self.x += self.speed
+        if w.is_key_pressed(KeyCode.SPACE):
+            self.money += 10
         if self.life<=1:
             end_game(Lose)
     def on_left_click_anywhere(self):
