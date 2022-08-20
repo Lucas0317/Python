@@ -116,8 +116,9 @@ class PlayerLife(Label):
 class PlayerMoney(Label):
     def on_create(self):
         self.scale=5
-        self.color = Color.YELLOW
+        self.color = Color.BLUE 
         self.text="0"
+        self.layer=5
         self.x=50
         self.y=950
     def on_update(self, dt):
